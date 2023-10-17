@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import { motion } from "framer-motion";
 import { Leaf1, Leaf2, about } from "../assets";
+import axios from "axios"
+import { toast } from 'react-hot-toast';
+
+
 
 const About = () => {
+  const [aboutDetail,setAboutDetail] = useState([])
+  
+
+//get all about 
+const getAbout = async() =>{
+try {
+  const {data} = await axios.get(`${process.env.REACT_APP_API}/detail/get-detail`);
+if (data?.success){
+  setAboutDetail(data?.details) ;
+  
+}
+}catch(error){
+  console.log(error)
+  toast.error("Somethimg went wrong in getting category")
+}
+}
+
+useEffect(() => {
+getAbout();
+},[]);
+
+
   return (
     <section id="about" className="flex items-center justify-center flex-col gap-12 my-12">
     {/* Title */}
@@ -26,16 +52,21 @@ const About = () => {
         {/* Image section */}
         <div className="w-full flex items-center justify-center px-8">
           <div className="w-full lg:w-96 p-[2px] rounded-md bg-gradient-to-br from bg-primary to-secondary relative">
-            <img src={about}
-            className=" w-full rounded-md h-auto object-contain" alt=""
-            />
+              
+         
+              <img src={`${process.env.REACT_APP_API}/detail/get-photo-detail/profileabout`} className="w-full rounded-md h-auto object-contain" alt="Profile About" />
+            
             <div className="absolute w-full h-full -top-3 -left-2 bg-gradient-to-br from bg-primary to-secondary rounded-md bluer-[5px] -z-10"></div>
           </div>
         </div>
 
         {/* Content section */}
         <div className="flex px-8 flex-col gap-4 items-start justify-start">
-          <p className="text-textlight text-base tracking-wide text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod, quisquam placeat, rem velit necessitatibus incidunt voluptatum distinctio ducimus illo provident ipsam harum ipsa quibusdam iusto obcaecati modi natus corrupti voluptate.</p>
+        {aboutDetail?.map((detail, index) => (
+    <p key={index} className="text-textlight text-base tracking-wide text-justify">
+      {detail.about}
+      </p>
+      ))}
         </div>
         {/* Add your content here */}
         

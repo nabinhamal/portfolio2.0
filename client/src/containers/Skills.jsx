@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import { motion } from "framer-motion";
 import { Leaf1, Leaf2 } from "../assets";
 import { SkillCard } from "../components";
-
+import axios from "axios"
+import { toast } from 'react-hot-toast';
 const Skills = () => {
+  const[eduAbout,setEduAbout] = useState([])
+
+
+//get all about 
+const getData = async() =>{
+  try {
+    const {data} = await axios.get(`${process.env.REACT_APP_API}/qualification/get-all`);
+  if (data?.success){
+    setEduAbout(data?.qualifications) ;
+    
+  }
+  }catch(error){
+    console.log(error)
+    toast.error("Somethimg went wrong in getting category")
+  }
+  }
+  
+  useEffect(() => {
+  getData();
+  },[]);
+
+
+
+
+
+
   return(
   <section id="skills" className="flex items-center justify-center flex-col gap-12 my-12">
   {/* Title */}
@@ -25,9 +52,13 @@ const Skills = () => {
     <div className="grid mt-10 grid-cols-1 lg:grid-cols-2 gap-3 w-full">
       {/* Content section */}
       <div className="flex px-8 flex-col gap-4 items-start justify-start">
-        <h2 className="w-full flex items-center justify-center px=8">Educaton</h2>
-        <p className="text-textlight text-base tracking-wide text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod, quisquam placeat, rem velit necessitatibus incidunt voluptatum distinctio ducimus illo provident ipsam harum ipsa quibusdam iusto obcaecati modi natus corrupti voluptate.</p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, esse cupiditate fugit laborum qui error nisi veniam doloremque et iusto, tenetur dolore iure iste, ipsum accusamus voluptatem dolor exercitationem. Aperiam?
+        <h2 className="w-full flex items-center justify-center px=8">Education</h2>
+       
+       {eduAbout?.map((qualification,item) =>
+         
+      <p key={item}  className="text-textlight text-base tracking-wide text-justify">{qualification.degree.Array}</p>
+      )} 
+      
       </div>
       {/* Add your content here */}
        {/* Content section */}

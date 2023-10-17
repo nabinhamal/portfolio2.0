@@ -3,8 +3,11 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoute.js";
+import detailRoutes from "./routes/detailRoute.js"
 import cors from "cors";
-
+import bodyParser from "body-parser";
+import qualificationRoutes from "./routes/qualificationRoute.js"
+import projectRoutes from "./routes/projectRoute.js"
 // Configure env
 dotenv.config();
 
@@ -18,12 +21,20 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 
 // Serve uploaded images
 app.use('/images', express.static('images'));
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/auth/detail", detailRoutes);
+app.use("/api/auth/qualification", qualificationRoutes);
+app.use("/api/auth/project", projectRoutes);
+
+
 
 // PORT
 const PORT = process.env.PORT || 5000;

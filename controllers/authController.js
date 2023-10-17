@@ -1,6 +1,6 @@
 import userModel from "../models/userModel.js";
 import { comparePassword, hashPassword } from "../helpers/authHelper.js";
-
+import JWT from "jsonwebtoken"
 
 export const regController = async (req, res) => {
   try {
@@ -23,11 +23,9 @@ export const regController = async (req, res) => {
     // Register the user...
     const hashedPassword = await hashPassword(password);
 
-    const user = new userModel({
-      
+    const user = new userModel({ 
       email,
       password: hashedPassword,
-    
     });
 
     await user.save();
@@ -77,14 +75,17 @@ export const loginController = async (req, res) => {
         message: "Invalid Password",
       });
     }
-
+    //token
+    const token = await JWT.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:"7d"})
     res.status(200).send({
       success: true,
       message: "Login successful",
       user: {
-        _id: user._id,
+        userId: user._id,
         email: user.email,
+        role:user.role,
       },
+      token,
     });
   } catch (error) {
     console.error(error);
@@ -119,6 +120,8 @@ export const getUserController = async (req, res) => {
     res.status(200).send({
       success: true,
       user: {email},
+      
+      
     });
   } catch (error) {
     console.error(error);
@@ -139,7 +142,7 @@ export const updateController = async (req, res) => {
     const { email, password } = req.body;
 
     // Check if the user with the provided ID exists...
-    const user = await userModel.findById(_id);
+    const user = await userModel.findById(id);
 
     if (!user) {
       return res.status(404).send({
@@ -158,7 +161,7 @@ export const updateController = async (req, res) => {
       success: true,
       message: "User information updated successfully",
       user: {
-        _id: user._id,
+        _id: user.id,
         email: user.email,
       },
     });
@@ -202,3 +205,4 @@ export const deleteController = async (req, res) => {
     });
   }
 };
+

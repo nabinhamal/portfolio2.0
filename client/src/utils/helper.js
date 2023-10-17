@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import {
   FaDiagramProject,
   FaEnvelope,
@@ -25,29 +26,31 @@ import {
 } from "react-icons/tb"
 
 
+
 export const Socials = [
+
   {
-    id: `facebook-${Date.now()}`,
+    id: uuidv4(),
     Icon: FaFacebookF,
-    uril: "",
+    uril: "https://www.facebook.com",
     color: "#1877F2",
   },
   {
-    id: `linkedin-${Date.now()}`,
+    id: uuidv4(),
     Icon: FaLinkedinIn,
-    uril: "",
+    uril: "https://linkedin.com/in/nabinhamal",
     color: "#0072b1",
   },
   {
-    id: `github-${Date.now()}`,
+    id: uuidv4(),
     Icon: FaGithub,
-    uril: "",
+    uril: "https://github.com/nabinhamal",
     color: "#fff",
   },
   {
-    id: `Website-${Date.now()}`,
+    id: uuidv4(),
     Icon: TbWorldWww,
-    uril: "",
+    uril: "https://nabinhamalportfolio.netlify.app",
     color: "#ff0000",
   },
 ];
