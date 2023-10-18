@@ -11,11 +11,11 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+ 
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    
     try {
       const res = await axios.post(`${process.env.REACT_APP_API}/login`, {email, password});
       if(res && res.data.success) {
@@ -26,6 +26,7 @@ const LoginPage = () => {
           token: res.data.token,
         });
         localStorage.setItem('auth', JSON.stringify(res.data));
+       
         navigate("/adminpanel");
       } else {
         toast.error(res.data.message);
@@ -34,14 +35,14 @@ const LoginPage = () => {
       console.log(error);
       toast.error("something went wrong");
     } finally {
-      setIsLoading(false);
+      
     }
   }
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
       <ParticlesContainer />
-      <div className="z-10 bg-white p-6 shadow-sm rounded-lg max-w-md w-full">
+      <div className="z-10  bg-lo p-6 shadow-sm rounded-lg max-w-md w-full">
         <h2 className="mt-0 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Sign In 
         </h2>
@@ -92,8 +93,8 @@ const LoginPage = () => {
           </div>
         </form>
       </div>
-      <Toaster />
-      {isLoading && <Spinner />}
+      <Toaster position="top-right " reverseOrder={false} />
+     
     </div>
   );
 }

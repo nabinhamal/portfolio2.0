@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../utils/auth';
 import { useNavigate, useLocation } from 'react-router-dom';
+import Spinner from '../components/Spinner';
 
 const Login = () => {
   const [auth, setAuth] = useAuth();
@@ -85,6 +86,7 @@ const Login = () => {
           Login
         </p>
       </button>
+      
     </div>
   );
 }

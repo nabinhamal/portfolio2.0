@@ -91,7 +91,7 @@ const Home = () => {
               duration: 2,
               ease: "linear",
             }}
-            src={`${process.env.REACT_APP_API}/detail/get-photo-detail/profilehome`} className="w-auto h-auto object-cover"
+            src={`${process.env.REACT_APP_API}/detail/get-photo-detail/profilehome`} style={{ width: '500px', height: '500px' }}
           />
         </div>
 

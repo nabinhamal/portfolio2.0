@@ -5,6 +5,7 @@ import { AdminPanel, App, LoginPage } from "./containers";
 import "./index.css";
 import { AuthProvider } from "./utils/auth";
 
+
 ReactDOM.render(
   <AuthProvider>
     <Router>

@@ -6,19 +6,16 @@ const projectSchema = new mongoose.Schema({
     ref: 'users',
     require: true,
   },
-pname:[{
-    ptitle:{
+
+    ptitle:[{
         type: String,
         required: true,
        
-      },
-      imgSrc:{
-        data: Buffer,       
-        contentType: String 
-      },
-      gitUrl:{
+      }],
+
+      gitUrl:[{
         type: String
-      },
+      
     }],
 },{ timestamps: true });
 

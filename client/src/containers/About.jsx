@@ -51,10 +51,10 @@ getAbout();
 
         {/* Image section */}
         <div className="w-full flex items-center justify-center px-8">
-          <div className="w-full lg:w-96 p-[2px] rounded-md bg-gradient-to-br from bg-primary to-secondary relative">
+          <div className="w-full lg:w-96 p-[2px] rounded-md bg-gradient-to-br from bg-primary to-secondary relative" style={{ width: '500px', height: '500px' }}>
               
          
-              <img src={`${process.env.REACT_APP_API}/detail/get-photo-detail/profileabout`} className="w-full rounded-md h-auto object-contain" alt="Profile About" />
+              <img src={`${process.env.REACT_APP_API}/detail/get-photo-detail/profileabout`} style={{ width: '500px', height: '500px' }} alt="Profile About" />
             
             <div className="absolute w-full h-full -top-3 -left-2 bg-gradient-to-br from bg-primary to-secondary rounded-md bluer-[5px] -z-10"></div>
           </div>

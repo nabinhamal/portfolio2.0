@@ -20,7 +20,7 @@ router.put("/update/:_id" ,updateController)
 router.delete("/delete/:_id",deleteController)
 
 //get user detail
-router.get("/user/:_id", getUserController);
+router.get("/user", getUserController);
 
 export default router;
 

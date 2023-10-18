@@ -5,11 +5,11 @@ import fs from 'fs';
 
 export const createProjectsController = async (req, res) => {
     try {
-        const { user, pname } = req.fields;
-        const { imgSrc } = req.files;
+        const { user, ptitle ,gitUrl } = req.body;
+       
 
         // Validation...
-        if (!user || !ptitle   || !gitUrl  ) {
+        if (!user || !ptitle || !gitUrl) {
             return res.status(400).send({ error: "All fields are required" });
         }
 
@@ -20,28 +20,23 @@ export const createProjectsController = async (req, res) => {
 
         const projects = new projectModel({
             user: user,
-        pname: {dataArray : pname},
+        ptitle,
+        gitUrl,
         });
 
-        if (imgSrc) {
-            projects.imgSrc = {
-                data: fs.readFileSync(imgSrc.path),
-                contentType: imgSrc.type
-            }
-        }
 
         await projects.save();
 
         res.status(201).send({
             success: true,
-            message: "Details registered successfully",
+            message: "projects registered successfully",
             projects,
         });
     } catch (error) {
         console.error(error);
         res.status(500).send({
             success: false,
-            message: "Error in details",
+            message: "Error in projects",
             error,
         });
     }
@@ -50,8 +45,8 @@ export const createProjectsController = async (req, res) => {
 
 export const getProjectsController = async (req, res) => {
     try {
-        const { _id } = req.params;
-        const projects = await projectModel.findById({_id});
+    
+        const projects = await projectModel.find({});
   
         if (!projects) {
             return res.status(404).send({ error: "projects not found" });
@@ -96,8 +91,8 @@ export const getProjectsController = async (req, res) => {
   export const updateProjectsController = async (req, res) => {
     try {
         const { _id } = req.params;
-        const {  pname } = req.fields;
-        const { imgSrc } = req.files;
+        const {  ptitle,gitUrl } = req.body;
+      
   
         // Find the existing details
         const projects = await projectModel.findById(_id);
@@ -109,17 +104,8 @@ export const getProjectsController = async (req, res) => {
         // Update fields
        
        
-        projects.pname = { dataArray:pname };
-      
-  
-        // Update profile images if provided
-        if (imgSrc) {
-            projects.imgSrc = {
-                data: fs.readFileSync(imgSrc.path),
-                contentType: imgSrc.type
-            };
-        }
-  
+        projects.ptitle = ptitle;
+        projects.gitUrl = gitUrl;
       
   
        
@@ -140,3 +126,6 @@ export const getProjectsController = async (req, res) => {
         });
     }
   };
+
+ 
+  

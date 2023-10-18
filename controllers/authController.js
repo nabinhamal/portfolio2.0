@@ -103,10 +103,10 @@ export const loginController = async (req, res) => {
 
 export const getUserController = async (req, res) => {
   try {
-    const { _id } = req.params;
+   
     
     // Check if the user with the provided ID exists...
-    const user = await userModel.findById(_id);
+    const user = await userModel.findOne({});
 
     if (!user) {
       return res.status(404).send({
@@ -119,7 +119,7 @@ export const getUserController = async (req, res) => {
 
     res.status(200).send({
       success: true,
-      user: {email},
+    user: {email},
       
       
     });
