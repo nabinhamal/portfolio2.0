@@ -4,19 +4,18 @@ const projectSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users',
-    require: true,
+    required: true,
   },
 
-    ptitle:[{
-        type: String,
-        required: true,
-       
-      }],
-
-      gitUrl:[{
-        type: String
-      
-    }],
+  pdetail: [
+    {
+      ptitle: [String],
+      gitUrl: [String],
+      pimage: {
+        data: Buffer,       
+        contentType: String 
+      },
+    }]
 },{ timestamps: true });
 
 export default mongoose.model("projects", projectSchema);

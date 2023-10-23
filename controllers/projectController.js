@@ -5,13 +5,10 @@ import fs from 'fs';
 
 export const createProjectsController = async (req, res) => {
     try {
-        const { user, ptitle ,gitUrl } = req.body;
-       
+        const { user, ptitle ,gitUrl } = req.fields;
+        const { pimage} = req.files;
 
-        // Validation...
-        if (!user || !ptitle || !gitUrl) {
-            return res.status(400).send({ error: "All fields are required" });
-        }
+       
 
         const userExists = await userModel.findById(user);
         if (!userExists) {
@@ -22,8 +19,14 @@ export const createProjectsController = async (req, res) => {
             user: user,
         ptitle,
         gitUrl,
+        
         });
-
+        if (pimage) {
+            projects.pimage = {
+                data: fs.readFileSync(pimage.path),
+                contentType: pimage.type
+            }
+        }
 
         await projects.save();
 
@@ -67,35 +70,36 @@ export const getProjectsController = async (req, res) => {
   };
   export const deleteProjectsController = async (req, res) => {
     try {
-        const { _id } = req.params;
-        const details = await projectModel.findByIdAndDelete(_id);
+        const { user } = req.params;
+        const projects = await projectModel.findByIdAndDelete(user);
   
-        if (!details) {
-            return res.status(404).send({ error: "Details not found" });
+        if (!projects) {
+            return res.status(404).send({ error: "projects not found" });
         }
   
         res.status(200).send({
             success: true,
-            message: "Details deleted successfully",
-            details,
+            message: "projects deleted successfully",
+           projects,
         });
     } catch (error) {
         console.error(error);
         res.status(500).send({
             success: false,
-            message: "Error deleting details",
+            message: "Error deletingprojects",
             error,
         });
     }
   };
   export const updateProjectsController = async (req, res) => {
     try {
-        const { _id } = req.params;
-        const {  ptitle,gitUrl } = req.body;
+        const { user, ptitle ,gitUrl } = req.fields;
+        const { pimage} = req.files;
+
       
   
-        // Find the existing details
-        const projects = await projectModel.findById(_id);
+        // Find the existingprojects
+        const projects = await projectModel.find(user);
   
         if (!projects) {
             return res.status(404).send({ error: "projects not found" });
@@ -103,10 +107,15 @@ export const getProjectsController = async (req, res) => {
   
         // Update fields
        
-       
+       projects.user= user;
         projects.ptitle = ptitle;
         projects.gitUrl = gitUrl;
-      
+        if (pimage) {
+           projects.pimage = {
+              data: fs.readFileSync(pimage.path),
+              contentType: pimage.type
+            };
+          };
   
        
   
@@ -121,7 +130,7 @@ export const getProjectsController = async (req, res) => {
         console.error(error);
         res.status(500).send({
             success: false,
-            message: "Error updating details",
+            message: "Error updating projects",
             error,
         });
     }

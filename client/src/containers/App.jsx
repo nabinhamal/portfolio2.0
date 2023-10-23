@@ -22,7 +22,7 @@ const App = () => {
     }
   } catch (error) {
     console.log(error);
-    toast.error("Something went wrong in getting category");
+    toast.error("Something went wrong ");
   }
 };
     
@@ -67,8 +67,8 @@ const App = () => {
     <MdEmail className="text-black text-2xl" />
     
 
-    {Email.map((em,index) => (
-    <p key={index} className="text-textlight text-center">{em}</p>
+    {Email?.map((em,index) => (
+    <p key={index} className="text-textlight text-center">{em.emails}</p>
   ))}
   </div>
 

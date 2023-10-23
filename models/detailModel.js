@@ -14,12 +14,9 @@ const detailSchema = new mongoose.Schema({
     type: String,
     require: true,
   }, 
-  exp: {
-    dataArray: {
-      type: [String],
-      
-    },
-  },
+  exp: [{
+    type: String,
+  }],
   profileabout: {
     data: Buffer,       
     contentType: String 

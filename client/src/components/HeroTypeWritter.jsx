@@ -9,7 +9,7 @@ const HeroTypeWritter = ({ words, speed }) => {
     let charIndex = 0;
 
     const typingInterval = setInterval(() => {
-      if (charIndex <= currentWord.length) {
+      if (charIndex <= currentWord?.length) {
         setCurrentText(currentWord.slice(0, charIndex));
         charIndex++;
       } else {

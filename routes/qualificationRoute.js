@@ -8,15 +8,15 @@ import { createQualificationController, deleteQualificationController, getAllQua
 const router = express.Router();
 
 //create detail route
-router.post("/create-qualification",requireSignIn,createQualificationController)
-router.put("/update-qualification/:_id",requireSignIn,updateQualificationController)
+router.post("/create-qualification",createQualificationController)
+router.put("/update-qualification/:user",updateQualificationController)
 
 //by id
-router.get("/get-qualification/:_id",requireSignIn,getQualificationByIdController)
+router.get("/get-qualification/:user",getQualificationByIdController)
 
 //get all
 router.get("/get-all",getAllQualificationsController)
 
-router.delete("/delete-qualification/:_id", requireSignIn,deleteQualificationController);
+router.delete("/delete-qualification/:user",deleteQualificationController);
 
 export default router;

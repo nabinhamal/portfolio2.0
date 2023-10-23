@@ -65,12 +65,12 @@ res.status(500).send({
 // Update a qualification record by ID
 export const updateQualificationController = async (req, res) => {
   try {
-    const { _id } = req.params;
+    const { user} = req.params;
     const { education, skills } = req.body;
   
 
     // Find the existing records
-    const records  = await qualificationModel.findById(_id);
+    const records  = await qualificationModel.findOne({user});
 
     if (!records ) {
         return res.status(404).send({ error: "Records not found" });
@@ -78,8 +78,8 @@ export const updateQualificationController = async (req, res) => {
 
     // Update fields
     
-    records .skills = skills;
-    records .education = education;
+    records.skills = skills;
+    records.education = education;
 
     await records.save();
 
@@ -127,5 +127,4 @@ export const deleteQualificationController = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 

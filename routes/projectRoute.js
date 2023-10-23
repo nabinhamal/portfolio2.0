@@ -9,14 +9,14 @@ import { createProjectsController, deleteProjectsController, getProjectsControll
 const router = express.Router();
 
 //create detail route
-router.post("/create-project",requireSignIn,createProjectsController)
-router.put("/update-project/:_id",requireSignIn,updateProjectsController)
+router.post("/create-project",formidable(),createProjectsController)
+router.put("/update-project/:user",formidable(),updateProjectsController)
 
 
 router.get("/get-project",getProjectsController)
 
 
 
-router.delete("/delete-project/:_id", requireSignIn, deleteProjectsController);
+router.delete("/delete-project/:user", deleteProjectsController);
 
 export default router;

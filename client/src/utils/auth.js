@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
         setAuth({
           ...auth,
           user: parseData.user,
-          token: parseData.token
+          token: parseData.token,
         });
       }
       
@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
       </AuthContext.Provider>
     );
   }
-  
+   
 
 //custom hook
 const useAuth =() => useContext(AuthContext)

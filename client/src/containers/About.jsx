@@ -20,7 +20,7 @@ if (data?.success){
 }
 }catch(error){
   console.log(error)
-  toast.error("Somethimg went wrong in getting category")
+  toast.error("Somethimg went wrong in getting details")
 }
 }
 

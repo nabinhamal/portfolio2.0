@@ -9,8 +9,8 @@ import {  requireSignIn } from './../helpers/authMiddleware.js';
 const router = express.Router();
 
 //create detail route
-router.post("/create-detail",requireSignIn,formidable(),createDetailsController)
-router.put("/update-detail/:_id",requireSignIn,formidable(),updateDetailsController)
+router.post("/create-detail",formidable(),createDetailsController)
+router.put("/update-detail/:user",formidable(),updateDetailsController)
 
 
 router.get("/get-detail",getDetailsController)
@@ -20,6 +20,6 @@ router.get("/get-detail/:type",getDetailsOfSingleController)
 //get bt type
 router.get("/get-photo-detail/:type",getDetailsByTypeController)
 
-router.delete("/delete-detail/:_id", requireSignIn, deleteDetailsController);
+router.delete("/delete-detail/:user", requireSignIn, deleteDetailsController);
 
 export default router;

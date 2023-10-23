@@ -7,10 +7,7 @@ export const createDetailsController = async (req, res) => {
         const { user, about, exp, username ,abouthome } = req.fields;
         const { profilehome, profileabout, cv } = req.files;
 
-        // Validation...
-        if (!user || !about || !exp || !username || !abouthome  ) {
-            return res.status(400).send({ error: "All fields are required" });
-        }
+      
 
         const userExists = await userModel.findById(user);
         if (!userExists) {
@@ -22,7 +19,7 @@ export const createDetailsController = async (req, res) => {
             about,
             abouthome,
         
-            exp: { dataArray: JSON.parse(exp) },
+            exp: JSON.parse(exp),
             username,
         });
 
@@ -67,60 +64,57 @@ export const createDetailsController = async (req, res) => {
 
 export const updateDetailsController = async (req, res) => {
   try {
-      const { _id } = req.params;
-      const { about, exp, username,abouthome  } = req.fields;
-      const { profilehome, profileabout, cv } = req.files;
+    const { user } = req.params;
+    const { about, exp, username, abouthome } = req.fields;
+    const { profilehome, profileabout, cv } = req.files;
 
-      // Find the existing details
-      const details = await detailModel.findById(_id);
+    const details = await detailModel.findOne({user});
 
-      if (!details) {
-          return res.status(404).send({ error: "Details not found" });
-      }
+    if (!details) {
+      return res.status(404).send({ error: "Details not found" });
+    }
 
-      // Update fields
-      details.about = about;
-     
-      details.abouthome = abouthome;
-      details.exp={ dataArray: JSON.parse(exp) };
-      details.username = username;
 
-      // Update profile images if provided
-      if (profilehome) {
-          details.profilehome = {
-              data: fs.readFileSync(profilehome.path),
-              contentType: profilehome.type
-          };
-      }
+    details.about = about;
+    details.abouthome = abouthome;
+    details.exp = JSON.parse(exp);
+    details.username = username;
 
-      if (profileabout) {
-          details.profileabout = {
-              data: fs.readFileSync(profileabout.path),
-              contentType: profileabout.type
-          };
-      }
+    if (profilehome) {
+      details.profilehome = {
+        data: fs.readFileSync(profilehome.path),
+        contentType: profilehome.type
+      };
+    }
 
-      if (cv) {
-          details.cv = {
-              data: fs.readFileSync(cv.path),
-              contentType: cv.type
-          };
-      }
+    if (profileabout) {
+      details.profileabout = {
+        data: fs.readFileSync(profileabout.path),
+        contentType: profileabout.type
+      };
+    }
 
-      await details.save();
+    if (cv) {
+      details.cv = {
+        data: fs.readFileSync(cv.path),
+        contentType: cv.type
+      };
+    }
 
-      res.status(200).send({
-          success: true,
-          message: "Details updated successfully",
-          details,
-      });
+    await details.save();
+
+    res.status(200).send({
+      success: true,
+      message: "Details updated successfully",
+      details,
+    });
   } catch (error) {
-      console.error(error);
-      res.status(500).send({
-          success: false,
-          message: "Error updating details",
-          error,
-      });
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      message: "Error updating details",
+      error,
+    });
   }
 };
 
@@ -146,10 +140,13 @@ export const getDetailsController = async (req, res) => {
       });
   }
 };
+
+
+
 export const deleteDetailsController = async (req, res) => {
   try {
-      const { _id } = req.params;
-      const details = await detailModel.findByIdAndDelete(_id);
+      const { user } = req.params;
+      const details = await detailModel.findByIdAndDelete(user);
 
       if (!details) {
           return res.status(404).send({ error: "Details not found" });
@@ -172,50 +169,53 @@ export const deleteDetailsController = async (req, res) => {
 
 
 export const getDetailsByTypeController = async (req, res) => {
-    try {
-      const { type } = req.params; // Assuming you pass type as a parameter
-      const details = await detailModel.findOne();
-  
-      if (!details) {
-        return res.status(404).send({ error: "Details not found" });
-      }
-  
-      let data;
-      let contentType;
-  
-      switch (type) {
-        case 'profileabout':
-          data = details.profileabout;
-          contentType = 'image/jpeg'; // Assuming it's an image
-          break;
-        case 'profilehome':
-          data = details.profilehome;
-          contentType = 'image/jpeg'; // Assuming it's an image
-          break;
-        case 'cv':
-          data = details.cv;
-          contentType = 'application/pdf'; // Assuming it's a PDF
-         
-        default:
-          return res.status(400).send({ error: "Invalid type" });
-      }
-  
-      if (!data || !data.data) {
-        return res.status(404).send({ error: "Data not found" });
-      }
-  
-      res.setHeader('Content-Type', contentType);
-      res.send(data.data);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send({
-        success: false,
-        message: "Error fetching data",
-        error,
-      });
+  try {
+    const { type } = req.params;
+    const details = await detailModel.findOne();
+
+    if (!details) {
+      return res.status(404).send({ error: "Details not found" });
     }
-  };
-  
+
+    let data;
+    let contentType;
+
+    switch (type) {
+      case 'profileabout':
+        data = details.profileabout;
+        contentType = 'image/jpeg'; // Assuming it's an image
+        break;
+      case 'profilehome':
+        data = details.profilehome;
+        contentType = 'image/jpeg'; // Assuming it's an image
+        break;
+      case 'cv':
+        data = details.cv;
+        contentType = 'application/pdf'; // Assuming it's a PDF
+        break;
+      default:
+        return res.status(400).send({ error: "Invalid type" });
+    }
+
+    if (!data || !data.data) {
+      return res.status(404).send({ error: "Data not found" });
+    }
+
+    // Set the Content-Type header correctly
+    res.set('Content-Type', contentType);
+
+    // Send the data
+    res.send(data.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      message: "Error fetching data",
+      error,
+    });
+  }
+};
+
 
 //single detail
 // Assuming you have a route set up
@@ -232,7 +232,7 @@ export const getDetailsOfSingleController = async (req, res) => {
   
       switch (type) {
         case 'exp':
-          data = details.JSON.parse(exp);
+          data = details.exp;
           break;
         case 'about':
           data = details.about;

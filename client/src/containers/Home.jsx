@@ -50,7 +50,7 @@ const Home = () => {
               <HeroTypeWritter 
                 speed={100}
                 key={index}
-                words={detail.exp.dataArray}
+                words={detail?.exp}
               />
             ))}
           </h2>
