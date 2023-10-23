@@ -1,5 +1,9 @@
-# Getting Started with Create React App
+# Link to live Mern Stack website
+It is hosted using the render and the netlify
+LINK:https://nabinhamal.netlify.app
 
+
+#Getting Started
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
