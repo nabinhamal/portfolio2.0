@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9cf5f387.css",
+    "main.js": "/static/js/main.8c691660.js",
+    "static/media/Thumb-pixabay-clone-v2–1.png": "/static/media/Thumb-pixabay-clone-v2–1.283da6c31fa2c95ed90b.png",
+    "static/media/Thumb-image-sharing-app-react-native-mar-23-updated.png": "/static/media/Thumb-image-sharing-app-react-native-mar-23-updated.fe8a59fd18b989b7aa68.png",
+    "static/media/thumb-fullstack-socialmedia-app-react-sanity.png": "/static/media/thumb-fullstack-socialmedia-app-react-sanity.9bb73b25697ca2c1c519.png",
+    "static/media/hero.png": "/static/media/hero.24f47e40036e2273e116.png",
+    "static/media/Thumb-openai-withreactjs.png": "/static/media/Thumb-openai-withreactjs.7a55325f78f1d968b617.png",
+    "static/media/Thumb-codepen-clone.png": "/static/media/Thumb-codepen-clone.8d2b382f47841d983f02.png",
+    "static/media/thumb_restaurant_app_mar22.png": "/static/media/thumb_restaurant_app_mar22.e9f4f9a8c04ea8d4c939.png",
+    "static/media/Thumb-expo-chat-app.png": "/static/media/Thumb-expo-chat-app.6c76d373ff509124c44e.png",
+    "static/media/chatbot2.jpg": "/static/media/chatbot2.359323881e7f9cc83e49.jpg",
+    "static/media/dele.jpg": "/static/media/dele.289a98298a8a6c8b7f46.jpg",
+    "static/media/leaf2.png": "/static/media/leaf2.659264fac53756a980a1.png",
+    "static/media/Leaf.png": "/static/media/Leaf.1073dfdd6f893dc9cb0f.png",
+    "static/media/ai.jpg": "/static/media/ai.2a9db5fa9bf332be07ab.jpg",
+    "static/media/thumb-portfolio-firebase.jpeg": "/static/media/thumb-portfolio-firebase.b20965ddccf3c849d6a8.jpeg",
+    "static/media/thumb-fresh0juics-tweenmax.jpg": "/static/media/thumb-fresh0juics-tweenmax.fa4a7ff6d0b7210142fc.jpg",
+    "static/media/chatbot.jpg": "/static/media/chatbot.9bd66863e6222a432194.jpg",
+    "static/media/pw.jpg": "/static/media/pw.4d4f486577b0d8e39dab.jpg",
+    "static/media/about.webp": "/static/media/about.f7b4ae1bc971de139af7.webp",
+    "index.html": "/index.html",
+    "main.9cf5f387.css.map": "/static/css/main.9cf5f387.css.map",
+    "main.8c691660.js.map": "/static/js/main.8c691660.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9cf5f387.css",
+    "static/js/main.8c691660.js"
+  ]
+}
