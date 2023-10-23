@@ -10,13 +10,13 @@ const router = express.Router();
 
 //create detail route
 router.post("/create-project",formidable(),createProjectsController)
-router.put("/update-project/:user",formidable(),updateProjectsController)
+router.put("/update-project/:id",formidable(),updateProjectsController)
 
 
 router.get("/get-project",getProjectsController)
 
 
 
-router.delete("/delete-project/:user", deleteProjectsController);
+router.delete("/delete-project/:id", deleteProjectsController);
 
 export default router;

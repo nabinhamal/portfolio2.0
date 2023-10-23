@@ -5,10 +5,7 @@ import qualificationModel from '../models/qualificationModel.js';
 export const createQualificationController = async (req, res) => {
   try {
     const { user, education, skills } = req.body;
-      // Validation...
-      if (!user || !education || !skills) {
-        return res.status(400).send({ error: "All fields are required" });
-    }
+  
 
     const existingUser = await userModel.findById(user);
 

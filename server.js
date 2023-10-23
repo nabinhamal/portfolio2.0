@@ -8,7 +8,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import qualificationRoutes from "./routes/qualificationRoute.js"
 import projectRoutes from "./routes/projectRoute.js"
-import projectImageRoutes from "./routes/projectImageRoute.js"
+
 import contactRoutes from "./routes/contactRoute.js"
 // Configure env
 dotenv.config();
@@ -35,7 +35,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/auth/detail", detailRoutes);
 app.use("/api/auth/qualification", qualificationRoutes);
 app.use("/api/auth/project", projectRoutes);
-app.use("/api/auth/projectImage",projectImageRoutes);
+
 app.use("/api/auth/contact",contactRoutes);
 
 

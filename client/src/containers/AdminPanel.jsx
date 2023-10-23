@@ -7,6 +7,7 @@ import { About, Menu, Project, Skill } from "../admin";
 import {Message} from "../admin"; // Import the Message component
 import LoginPage from './LoginPage';
 
+
 const AdminPanel = ({ onLogout}) => {
   const [auth, setAuth] = useAuth();
 
@@ -46,7 +47,7 @@ const AdminPanel = ({ onLogout}) => {
 
          {/* Include the Message component here */}
         <Menu/>
-
+<Message/>
       </div>
     </div>
   );

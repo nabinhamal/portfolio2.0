@@ -1,32 +1,10 @@
-import React ,{useState,useEffect}from "react";
+import React ,{useState}from "react";
 import { motion , AnimatePresence } from "framer-motion";
 import { Leaf1, Leaf2, about } from "../assets";
 import { ProjectsData } from './../utils/helper';
 import { FaGithub } from "react-icons/fa6";
-import axios from "axios";
-import { toast } from 'react-hot-toast';
+
 const Projects = () => {
-  const [projects, setProjects] = useState([]);
-
-  // Get all about
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${process.env.REACT_APP_API}/project/get-project`);
-        console.log(data);
-        setProjects(data?.projects[0]?.pname || []); // Ensure pname is an array or default to empty array
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-
-
-
-
   return (
     <section id="projects" className="flex items-center justify-center flex-col gap-12 my-12">
       {/* Title */}
@@ -48,39 +26,41 @@ const Projects = () => {
       {/* Main content */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
         <AnimatePresence>
-          {ProjectsData && ProjectsData?.map((project,index) => (
-            <ProjectCard key={index} project={project}/>
+          {ProjectsData && ProjectsData.map((project,index) => (
+            <ProjectCard key={project.id} project={project}/>
           ))}
         </AnimatePresence>
       </div>
     </section>
   )
 }
-const ProjectCard = ({ project }) => {
-  const [isHovered, setIsHovered] = useState(false);
 
+const ProjectCard = ({ project }) => {
+  const [ishoverd, setisHoverd] = useState(false)
   return (
     <motion.div
+      key={project.id}
       className="overflow-hidden cursor-pointer relative rounded-md"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => setisHoverd(true)}
+      onMouseLeave={() => setisHoverd(false)}
     >
       <motion.img 
-        whileHover={{ scale: 1.1 }}
+        whileHover={{scale : 1.1}}
         className="w-full h-full object-contain rounded-lg"
-        src={`${process.env.REACT_APP_API}/project/get-project/imgSrc`}  
-        alt={project.ptitle}  
+        src={project.imgSrc}
+        alt={project.title}  
       />
-      {isHovered && (
-        <motion.div className="absolute inset-0 backdrop-blur-md bg-[rgba(0,0,0,0.6)] flex items-center justify-center flex-col gap-2">
-          <p className="text-xl text-primary">{project.ptitle}</p>
-          <a href={project.gitUrl} className="">
-            <FaGithub className="text-3xl text-white items-center justify-center hover:text-primary"/>
-          </a>
-        </motion.div>
-      )}
+{ishoverd && (
+  <motion.div className="absolute inset-0 backdrop-blur-md bg-[rgba(0,0,0,0.6)] flex items-center justify-center flex-co, gap-2">
+  <p className="text-xl text-primary">{project?.name}</p>
+  <a href={project?.gitURL} className="">
+  <FaGithub className="text-3xl text-white items-center justify-center hover:text-primary"/>
+/</a>
+</motion.div>
+)}
+
     </motion.div>
-  );
+  )
 }
 
 export default Projects;

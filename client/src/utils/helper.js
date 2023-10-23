@@ -10,17 +10,7 @@ import {
   FaUser,
   
 } from "react-icons/fa6";
-import {
-  ChatApp,
-  CodePenClone,
-  FreshJuiceUI,
-  ImageSharing,
-  OpenAI,
-  PixabayClone,
-  PortfolioFirebase,
-  RestaurantClone,
-  SocialMedia,
-} from "../assets";
+import { Ai, Chatbot, Mern, Port, Res } from "../assets";
 import {
   TbWorldWww
 } from "react-icons/tb"
@@ -92,55 +82,31 @@ export const ProjectsData = [
   {
     id: `food-${Date.now()}`,
     name: "Single Food Restaurant",
-    imgSrc: RestaurantClone,
-    gitURL: "https://github.com/nabinhamal",
+    imgSrc: Res,
+    gitURL: "daurakokitchen.netlify.app",
   },
   {
     id: `codepen-${Date.now()}`,
-    name: "CodePen Clone",
-    imgSrc: CodePenClone,
-    gitURL: "https://github.com/nabinhamal",
+    name: "Ai Summerizer",
+    imgSrc: Ai,
+    gitURL: "https://github.com/nabinhamal/Summarize",
   },
   {
     id: `openai-${Date.now()}`,
-    name: "OpenAI",
-    imgSrc: OpenAI,
-    gitURL: "https://github.com/nabinhamal",
+    name: "Portfolio Website",
+    imgSrc: Port,
+    gitURL: "https://nabinhamalportfolio.netlify.app",
   },
   {
     id: `chatapp-${Date.now()}`,
-    name: "Chat App Build",
-    imgSrc: ChatApp,
-    gitURL: "https://github.com/nabinhamal",
+    name: "Chat Bot",
+    imgSrc: Chatbot,
+    gitURL: "https://github.com/nabinhamal/chatbot",
   },
   {
-    id: `imageSharing-${Date.now()}`,
-    name: "Image Sharing App",
-    imgSrc: ImageSharing,
-    gitURL: "https://github.com/nabinhamal",
-  },
-  {
-    id: `pixabayclone-${Date.now()}`,
-    name: "Pixabay Clone 2.0",
-    imgSrc: PixabayClone,
-    gitURL: "https://github.com/nabinhamal",
-  },
-  {
-    id: `freshjuiceui-${Date.now()}`,
-    name: "Fresh Juice UI Build",
-    imgSrc: FreshJuiceUI,
-    gitURL: "https://github.com/nabinhamal",
-  },
-  {
-    id: `socialmedia-${Date.now()}`,
-    name: "Social Media App",
-    imgSrc: SocialMedia,
-    gitURL: "https://github.com/nabinhamal",
-  },
-  {
-    id: `portfoliofirebase-${Date.now()}`,
-    name: "Portfolio UI Fireabse",
-    imgSrc: PortfolioFirebase,
-    gitURL: "https://github.com/nabinhamal",
-  },
+    id: `chatapp-${Date.now()}`,
+    name: "Mern Portfolio",
+    imgSrc: Mern,
+    gitURL: "https://github.com/nabinhamal/portfolio2.0",
+  }
 ];

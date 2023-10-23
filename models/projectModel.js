@@ -1,21 +1,25 @@
+// projectModel.js
+
 import mongoose from 'mongoose';
 
 const projectSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'users',
+  pname:{
+type:String,
+required:true,
+unique: true,
+  },
+  ptitle: {
+    type: String,
     required: true,
   },
+  gitUrl: {
+    type: String,
+    required: true,
+  },
+  pimage: {
+    data: Buffer,
+    contentType: String,
+  },
+}, { timestamps: true });
 
-  pdetail: [
-    {
-      ptitle: [String],
-      gitUrl: [String],
-      pimage: {
-        data: Buffer,       
-        contentType: String 
-      },
-    }]
-},{ timestamps: true });
-
-export default mongoose.model("projects", projectSchema);
+export default mongoose.model('projects', projectSchema);

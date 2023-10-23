@@ -14,3 +14,9 @@ export { default as PixabayClone } from "./img/Project/Thumb-pixabay-clone-v2–
 export { default as FreshJuiceUI } from "./img/Project/thumb-fresh0juics-tweenmax.jpg";
 export { default as SocialMedia } from "./img/Project/thumb-fullstack-socialmedia-app-react-sanity.png";
 export { default as PortfolioFirebase } from "./img/Project/thumb-portfolio-firebase.jpeg";
+export { default as Ai } from "./img/Project/ai.jpg";
+export { default as Chatbot } from "./img/Project/chatbot.jpg";
+export { default as Mern } from "./img/Project/chatbot2.jpg";
+export { default as Res } from "./img/Project/dele.jpg";
+export { default as Port } from "./img/Project/pw.jpg";
+

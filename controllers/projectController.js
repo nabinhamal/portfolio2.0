@@ -1,26 +1,27 @@
+// projectController.js
 
-import projectModel from "../models/projectModel.js";
-import userModel from "../models/userModel.js";
 import fs from 'fs';
+import projectModel from '../models/projectModel.js';
+import userModel from '../models/userModel.js';
+
+// ...
 
 export const createProjectsController = async (req, res) => {
     try {
-        const { user, ptitle ,gitUrl } = req.fields;
-        const { pimage} = req.files;
-
        
+        
+        const pname= req.fields.pname;
+        const ptitle = req.fields.ptitle;
+        const gitUrl = req.fields.gitUrl;
+        const pimage = req.files.pimage;
 
-        const userExists = await userModel.findById(user);
-        if (!userExists) {
-            return res.status(404).send({ error: "User not found" });
-        }
 
         const projects = new projectModel({
-            user: user,
-        ptitle,
-        gitUrl,
-        
+       pname,
+            ptitle,
+            gitUrl
         });
+
         if (pimage) {
             projects.pimage = {
                 data: fs.readFileSync(pimage.path),
@@ -45,85 +46,37 @@ export const createProjectsController = async (req, res) => {
     }
 };
 
+export const updateProjectsController = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const ptitle = req.fields.ptitle;
+        const gitUrl = req.fields.gitUrl;
+        const pimage = req.files.pimage;
+        console.log(req.body);
+        // Find the existing projects
+        const projects = await projectModel.findByIdAndUpdate({ id });
 
-export const getProjectsController = async (req, res) => {
-    try {
-    
-        const projects = await projectModel.find({});
-  
         if (!projects) {
-            return res.status(404).send({ error: "projects not found" });
+            return res.status(404).send({ error: "Projects not found" });
         }
-  
-        res.status(200).send({
-            success: true,
-            projects,
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({
-            success: false,
-            message: "Error fetching projects",
-            error,
-        });
-    }
-  };
-  export const deleteProjectsController = async (req, res) => {
-    try {
-        const { user } = req.params;
-        const projects = await projectModel.findByIdAndDelete(user);
-  
-        if (!projects) {
-            return res.status(404).send({ error: "projects not found" });
-        }
-  
-        res.status(200).send({
-            success: true,
-            message: "projects deleted successfully",
-           projects,
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({
-            success: false,
-            message: "Error deletingprojects",
-            error,
-        });
-    }
-  };
-  export const updateProjectsController = async (req, res) => {
-    try {
-        const { user, ptitle ,gitUrl } = req.fields;
-        const { pimage} = req.files;
 
-      
-  
-        // Find the existingprojects
-        const projects = await projectModel.find(user);
-  
-        if (!projects) {
-            return res.status(404).send({ error: "projects not found" });
-        }
-  
         // Update fields
-       
-       projects.user= user;
         projects.ptitle = ptitle;
         projects.gitUrl = gitUrl;
-        if (pimage) {
-           projects.pimage = {
-              data: fs.readFileSync(pimage.path),
-              contentType: pimage.type
-            };
-          };
-  
+
        
-  
+    if (pimage) {
+        projects.pimage = {
+          data: fs.readFileSync(pimage.path),
+          contentType: pimage.type
+        };
+      }
+      console.log(req.body);
         await projects.save();
-  
+
         res.status(200).send({
             success: true,
-            message: "projects updated successfully",
+            message: "Projects updated successfully",
             projects,
         });
     } catch (error) {
@@ -134,7 +87,55 @@ export const getProjectsController = async (req, res) => {
             error,
         });
     }
-  };
+};
 
- 
-  
+// ...
+
+
+export const getProjectsController = async (req, res) => {
+  try {
+    const projects = await projectModel.find({});
+
+    if (!projects) {
+      return res.status(404).send({ error: 'Projects not found' });
+    }
+
+    res.status(200).send({
+      success: true,
+      projects,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error fetching projects',
+      error,
+    });
+  }
+};
+
+export const deleteProjectsController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const projects = await projectModel.findByIdAndDelete(id);
+
+    if (!projects) {
+      return res.status(404).send({ error: 'Projects not found' });
+    }
+
+    res.status(200).send({
+      success: true,
+      message: 'Projects deleted successfully',
+      projects,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error deleting projects',
+      error,
+    });
+  }
+};
+
+
