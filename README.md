@@ -1,6 +1,6 @@
-# Link to live Mern Stack website
+# Link to live Mern Stack website:https://nabinhamal.netlify.app
 It is hosted using the render and the netlify
-LINK:https://nabinhamal.netlify.app
+L
 
 
 #Getting Started
