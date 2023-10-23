@@ -10,11 +10,18 @@ import qualificationRoutes from "./routes/qualificationRoute.js"
 import projectRoutes from "./routes/projectRoute.js"
 
 import contactRoutes from "./routes/contactRoute.js"
+
+import path from 'path'
+import {fileURLToPath} from 'url' 
 // Configure env
 dotenv.config();
 
 // Database config
 connectDB();
+
+//es module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Rest object
 const app = express();
@@ -25,6 +32,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname,'./client/build')));
 
 
 // Serve uploaded images
@@ -38,7 +46,9 @@ app.use("/api/auth/project", projectRoutes);
 
 app.use("/api/auth/contact",contactRoutes);
 
-
+app.use("*",function(req,res){
+res.sendFile(path.join(__dirname, "./client/build/index.html") )
+})
 
 // PORT
 const PORT = process.env.PORT || 5000;
