@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "type": "module",
-  "proxy":"https://mern-portfolio-oicp.onrender.com"
+ 
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
