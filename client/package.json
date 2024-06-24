@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-   "proxy":"https://mern-portfolio-oicp.onrender.com"
+   "proxy":"https://mernportfolio-7e5q.onrender.com"
   "version": "0.1.0",
   "private": true,
   "dependencies": {
