@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-   "proxy":"https://mernportfolio-7e5q.onrender.com"
+   "proxy":"https://mpapi.onrender.com"
   "version": "0.1.0",
   "private": true,
   "dependencies": {
